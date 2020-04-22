@@ -8,7 +8,10 @@
 	</head>
 	<body>
 		<div class="container">
-			<canvas id="line-chart"></canvas>
+			<?php
+				include 'data.php';
+			 ?>
+			<canvas id="line-chart" data-database='<?php echo JSON_encode($data) ?>'></canvas>
 		</div>
 	</body>
 	<script src="js/main.js" charset="utf-8"></script>
