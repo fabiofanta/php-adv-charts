@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	lineChart();
-	
+
 
 	function lineChart() {
 		$.ajax({
@@ -33,5 +33,5 @@ $(document).ready(function () {
 
 
 		});
-	};
+	}
 });
