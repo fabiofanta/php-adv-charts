@@ -19,7 +19,6 @@ $(document).ready(function () {
 
 				var dataRevsByAgent = dataRevByAgentBuilder(jsonData);
 
-
 				chartGenerator('#agent-revenue-chart',chartDataRevByAgent(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
 
