@@ -1,34 +1,25 @@
 $(document).ready(function () {
 
-	lineChart();
+	chartBuilder();
 
 
-	function lineChart() {
+	function chartBuilder() {
 		$.ajax({
 			url:'Servers/server2.php',
 			method: 'GET',
 			success:function(data) {
 				var jsonDatas = JSON.parse(data);
 				console.log(jsonDatas);
-				var months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
-				var revenuesXMonth = [];
 
-				for (var i = 0; i < jsonDatas.fatturato.data.length; i++) {
-					var jsonData = jsonDatas.fatturato.data[i];
-					revenuesXMonth.push(jsonData);
-				};
+				var dataRevenues = dataRevenueBuilder(jsonDatas);
 
-				chart('#line-chart',dataRevenue(jsonDatas.fatturato.type,months,revenuesXMonth));
 
-				var agentName = [];
-				var revenuesXAgent = [];
+				chart('#montly-revenue-chart',dataRevenue(jsonDatas.fatturato.type,dataRevenues.labels,dataRevenues.data));
 
-				for (var variable in jsonDatas.fatturato_by_agent.data) {
-					agentName.push(variable);
-					revenuesXAgent.push(jsonDatas.fatturato_by_agent.data[variable]);
-				};
+				var dataRevsByAgent = dataRevByAgentBuilder(jsonDatas);
 
-				chart('#pie-chart',dataRevByAgent(jsonDatas.fatturato_by_agent.type,agentName,revenuesXAgent));
+
+				chart('#agent-revenue-chart',dataRevByAgent(jsonDatas.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
 
 			},
@@ -44,6 +35,29 @@ $(document).ready(function () {
 	function chart(selector,data) {
 		var ctx = $(selector);
 		var myChart = new Chart(ctx,data);
+	}
+
+	function dataRevenueBuilder(datasets) {
+		var months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+		var revenuesXMonth = [];
+
+		for (var i = 0; i < datasets.fatturato.data.length; i++) {
+			var dataset = datasets.fatturato.data[i];
+			revenuesXMonth.push(dataset);
+		};
+		return {data:revenuesXMonth,labels:months}
+	}
+
+	function dataRevByAgentBuilder(datasets) {
+		var agentName = [];
+		var revenuesXAgent = [];
+
+		for (var variable in datasets.fatturato_by_agent.data) {
+			agentName.push(variable);
+			revenuesXAgent.push(datasets.fatturato_by_agent.data[variable]);
+		};
+
+		return {data:revenuesXAgent,labels:agentName}
 	}
 
 	function dataRevenue(ghType,labels,data) {

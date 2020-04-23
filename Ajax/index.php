@@ -8,8 +8,8 @@
 	</head>
 	<body>
 		<div class="container">
-			<canvas id="line-chart"></canvas>
-			<canvas id="pie-chart"></canvas>
+			<canvas id="montly-revenue-chart"></canvas>
+			<canvas id="agent-revenue-chart"></canvas>
 		</div>
 	</body>
 	<script src="js/main.js" charset="utf-8"></script>
