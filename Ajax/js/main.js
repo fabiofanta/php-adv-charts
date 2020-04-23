@@ -12,16 +12,15 @@ $(document).ready(function () {
 			method: 'GET',
 			success:function(data) {
 				var jsonData = JSON.parse(data);
-				
+
 				var dataRevenues = dataRevenuesBuilder(jsonData);
 
-
-				chart('#montly-revenue-chart',chartDataRevenues(jsonData.fatturato.type,dataRevenues.labels,dataRevenues.data));
+				chartGenerator('#montly-revenue-chart',chartDataRevenues(jsonData.fatturato.type,dataRevenues.labels,dataRevenues.data));
 
 				var dataRevsByAgent = dataRevByAgentBuilder(jsonData);
 
 
-				chart('#agent-revenue-chart',chartDataRevByAgent(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
+				chartGenerator('#agent-revenue-chart',chartDataRevByAgent(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
 
 			},
@@ -34,7 +33,7 @@ $(document).ready(function () {
 		});
 	}
 
-	function chart(selector,data) {
+	function chartGenerator(selector,data) {
 		var ctx = $(selector);
 		var myChart = new Chart(ctx,data);
 	}
