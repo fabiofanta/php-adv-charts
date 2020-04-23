@@ -13,13 +13,13 @@ $(document).ready(function () {
 			success:function(data) {
 				var jsonData = JSON.parse(data);
 
-				var dataRevenues = dataRevenuesBuilder(jsonData);
+				var dataRevenues = dataRevenuesBuilder(jsonData); // data builder for chart.js
 
-				chartGenerator('#montly-revenue-chart',chartDataRevenues(jsonData.fatturato.type,dataRevenues.labels,dataRevenues.data));
+				chartGenerator('#montly-revenue-chart',chartRevSetting(jsonData.fatturato.type,dataRevenues.labels,dataRevenues.data));
 
-				var dataRevsByAgent = dataRevByAgentBuilder(jsonData);
+				var dataRevsByAgent = dataRevByAgentBuilder(jsonData); // data builder for chart.js 
 
-				chartGenerator('#agent-revenue-chart',chartDataRevByAgent(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
+				chartGenerator('#agent-revenue-chart',chartRevByAgentSetting(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
 
 			},
@@ -60,7 +60,7 @@ $(document).ready(function () {
 		return {data:revenuesXAgent,labels:agentName}
 	}
 
-	function chartDataRevenues(ghType,labels,data) {
+	function chartRevSetting(ghType,labels,data) {
 		data = {
 			type: ghType,
 			data: {
@@ -76,7 +76,7 @@ $(document).ready(function () {
 		return data;
 	}
 
-	function chartDataRevByAgent(ghType,labels,data) {
+	function chartRevByAgentSetting(ghType,labels,data) {
 		data = {
 			type: ghType,
 			data: {
