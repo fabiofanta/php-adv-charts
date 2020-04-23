@@ -3,29 +3,31 @@ $(document).ready(function () {
 	chartBuilder();
 
 
+
+
+
 	function chartBuilder() {
 		$.ajax({
 			url:'Servers/server2.php',
 			method: 'GET',
 			success:function(data) {
-				var jsonDatas = JSON.parse(data);
-				console.log(jsonDatas);
-
-				var dataRevenues = dataRevenueBuilder(jsonDatas);
-
-
-				chart('#montly-revenue-chart',dataRevenue(jsonDatas.fatturato.type,dataRevenues.labels,dataRevenues.data));
-
-				var dataRevsByAgent = dataRevByAgentBuilder(jsonDatas);
+				var jsonData = JSON.parse(data);
+				
+				var dataRevenues = dataRevenuesBuilder(jsonData);
 
 
-				chart('#agent-revenue-chart',dataRevByAgent(jsonDatas.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
+				chart('#montly-revenue-chart',chartDataRevenues(jsonData.fatturato.type,dataRevenues.labels,dataRevenues.data));
+
+				var dataRevsByAgent = dataRevByAgentBuilder(jsonData);
+
+
+				chart('#agent-revenue-chart',chartDataRevByAgent(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
 
 			},
 
 			error:function() {
-				alert('Errore');
+				alert('Error');
 			}
 
 
@@ -37,7 +39,7 @@ $(document).ready(function () {
 		var myChart = new Chart(ctx,data);
 	}
 
-	function dataRevenueBuilder(datasets) {
+	function dataRevenuesBuilder(datasets) {
 		var months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
 		var revenuesXMonth = [];
 
@@ -60,7 +62,7 @@ $(document).ready(function () {
 		return {data:revenuesXAgent,labels:agentName}
 	}
 
-	function dataRevenue(ghType,labels,data) {
+	function chartDataRevenues(ghType,labels,data) {
 		data = {
 			type: ghType,
 			data: {
@@ -76,7 +78,7 @@ $(document).ready(function () {
 		return data;
 	}
 
-	function dataRevByAgent(ghType,labels,data) {
+	function chartDataRevByAgent(ghType,labels,data) {
 		data = {
 			type: ghType,
 			data: {
