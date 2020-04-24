@@ -5,7 +5,7 @@
 	$months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
 
 	 // $graphs['fatturato']['access']
-	 $access_level = 1;
+	 $access_level = 2;
 
 	if ($access_level >= 0) {
 		$data['montly_revenue']['type'] = $graphs['fatturato']['type'];

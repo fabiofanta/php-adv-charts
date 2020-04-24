@@ -16,11 +16,11 @@ $(document).ready(function () {
 
 				var dataRevenues = dataRevenuesBuilder(jsonData); // data builder for chart.js
 
-				chartGenerator('#montly-revenue-chart',chartRevSetting(jsonData.fatturato.type,dataRevenues.labels,dataRevenues.data));
+				chartGenerator('#montly-revenue-chart',chartRevSetting(jsonData.montly_revenue.type,dataRevenues.labels,dataRevenues.data));
 
 				var dataRevsByAgent = dataRevByAgentBuilder(jsonData); // data builder for chart.js
 
-				chartGenerator('#agent-revenue-chart',chartRevByAgentSetting(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
+				chartGenerator('#agent-revenue-chart',chartRevByAgentSetting(jsonData.agent_revenue.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
 
 			},
@@ -42,8 +42,8 @@ $(document).ready(function () {
 		var months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
 		var revenuesXMonth = [];
 
-		for (var i = 0; i < datasets.fatturato.data.length; i++) {
-			var dataset = datasets.fatturato.data[i];
+		for (var i = 0; i < datasets.montly_revenue.data.length; i++) {
+			var dataset = datasets.montly_revenue.data[i];
 			revenuesXMonth.push(dataset);
 		};
 		return {data:revenuesXMonth,labels:months}
@@ -53,9 +53,9 @@ $(document).ready(function () {
 		var agentName = [];
 		var revenuesXAgent = [];
 
-		for (var variable in datasets.fatturato_by_agent.data) {
+		for (var variable in datasets.agent_revenue.data) {
 			agentName.push(variable);
-			revenuesXAgent.push(datasets.fatturato_by_agent.data[variable]);
+			revenuesXAgent.push(datasets.agent_revenue.data[variable]);
 		};
 
 		return {data:revenuesXAgent,labels:agentName}
