@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
 	chartBuilder();
+	randomColor();
 
 
 
@@ -23,7 +24,6 @@ $(document).ready(function () {
 				chartGenerator('#agent-revenue-chart',chartRevByAgentSetting(jsonData.agent_revenue.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
 				var dataTeamEff = teamEffBuilder(jsonData);
-				console.log(dataTeamEff);
 
 				chartGenerator('#team-efficiency-chart',chartTeamEff(jsonData.team_efficiency.type,dataTeamEff.labels,dataTeamEff.data));
 
@@ -71,7 +71,7 @@ $(document).ready(function () {
 		var teams = [];
 
 		for (var variable in datasets.team_efficiency.data) {
-			teams.push({label: variable,data:datasets.team_efficiency.data[variable],backgroundColor:'green',borderColor:'red'});
+			teams.push({label: variable,data:datasets.team_efficiency.data[variable],backgroundColor:randomColor(),borderColor:randomColor()});
 		};
 
 		return {data:teams,labels:months}
@@ -85,8 +85,8 @@ $(document).ready(function () {
 				datasets: [{
 					label: 'Vendite',
 					data: data,
-					backgroundColor: 'green',
-					borderColor: 'red',
+					backgroundColor: randomColor(),
+					borderColor: randomColor(),
 				}]
 			},
 		}
@@ -101,8 +101,8 @@ $(document).ready(function () {
 				datasets: [{
 					label: 'Revenue By Agent',
 					data: data,
-					backgroundColor: 'yellow',
-					borderColor: 'red',
+					backgroundColor: randomColor(),
+					borderColor: randomColor(),
 				}]
 			},
 		}
@@ -118,5 +118,12 @@ $(document).ready(function () {
 			},
 		}
 		return data;
+	}
+
+	function randomColor() {
+		var rdNum = Math.floor(Math.random() * 256);
+		var color = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) +')';
+
+		return color
 	}
 });
