@@ -8,8 +8,19 @@
 	</head>
 	<body>
 		<div class="container">
-			<canvas id="montly-revenue-chart"></canvas>
-			<canvas id="agent-revenue-chart"></canvas>
+			<?php
+				include __DIR__ . '/Access/access.php';
+				echo $access_level;
+
+				if ($access_level >= 0) { ?>
+					<canvas id="montly-revenue-chart"></canvas>
+		  	<?php }  ?>
+			<?php if ($access_level >=1) { ?>
+				  <canvas id="agent-revenue-chart"></canvas>
+			<?php  } ?>
+		    <?php if ($access_level >= 2) { ?>
+			  <canvas id="team-efficiency-chart"></canvas>
+		  	<?php  } ?>
 		</div>
 	</body>
 	<script src="js/main.js" charset="utf-8"></script>
