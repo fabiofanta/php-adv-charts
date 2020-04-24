@@ -1,36 +1,35 @@
 <?php
 
 	include __DIR__ . '/../Database/data3.php';
-	include __DIR__ . '/../Access/access.php';
+
 	$months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
 
-	if ($access_level == 0) {
-		$montly_revenue['type'] = $graphs[0]['fatturato']['type'];
-		$montly_revenue['labels'] = $months;
-		$montly_revenue['data'] = $graphs['fatturato']['data'];
+	 // $graphs['fatturato']['access']
+	 $access_level = 1;
 
-		echo JSON_encode($montly_revenue);
+	if ($access_level >= 0) {
+		$data['montly_revenue']['type'] = $graphs['fatturato']['type'];
+		$data['montly_revenue']['labels'] = $months;
+		$data['montly_revenue']['data'] = $graphs['fatturato']['data'];
 
-	} elseif ($access_level > 0) {
-		$agent_revenue['type'] = $graphs[1]['fatturato_by_agent']['type'];
-		$agent_revenue['labels'] = [];
-		$agent_revenue['data'] = [];
+	} if ($access_level >= 1) {
+		$data['agent_revenue']['type'] = $graphs['fatturato_by_agent']['type'];
+		$data['agent_revenue']['labels'] = [];
+		$data['agent_revenue']['data'] = [];
 
-		foreach ($graphs[1]['fatturato_by_agent']['data'] as $key => $value) {
-			$agent_revenue['labels'][] = $key;
-			$agent_revenue['data'][] = $value;
-
-			echo JSON_encode($agent_revenue);
+		foreach ($graphs['fatturato_by_agent']['data'] as $key => $value) {
+			$data['agent_revenue']['labels'][] = $key;
+			$data['agent_revenue']['data'][] = $value;
 		};
 
-	} elseif ($access_level > 1) {
-		$team_efficiency['type'] = $graphs[2]['team_efficiency']['type'];
-		$team_efficiency['labels'] = $months;
-		$team_efficiency['data'] = $graphs['team_efficiency']['data'];
-
-		echo JSON_encode($team_efficiency);
+	} if ($access_level >= 2) {
+		$data['team_efficiency']['type'] = $graphs['team_efficiency']['type'];
+		$data['team_efficiency']['labels'] = $months;
+		$data['team_efficiency']['data'] = $graphs['team_efficiency']['data'];
 
 	};
+
+	echo JSON_ENCODE($data);
 
 
  ?>

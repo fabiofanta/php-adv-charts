@@ -8,16 +8,17 @@ $(document).ready(function () {
 
 	function chartBuilder() {
 		$.ajax({
-			url:'Servers/server2.php',
+			url:'Servers/server3.php',
 			method: 'GET',
 			success:function(data) {
 				var jsonData = JSON.parse(data);
+				console.log(jsonData);
 
 				var dataRevenues = dataRevenuesBuilder(jsonData); // data builder for chart.js
 
 				chartGenerator('#montly-revenue-chart',chartRevSetting(jsonData.fatturato.type,dataRevenues.labels,dataRevenues.data));
 
-				var dataRevsByAgent = dataRevByAgentBuilder(jsonData); // data builder for chart.js 
+				var dataRevsByAgent = dataRevByAgentBuilder(jsonData); // data builder for chart.js
 
 				chartGenerator('#agent-revenue-chart',chartRevByAgentSetting(jsonData.fatturato_by_agent.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
