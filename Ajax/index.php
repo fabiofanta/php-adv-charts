@@ -20,6 +20,7 @@
 		    <?php if ($access_level >= 2) { ?>
 			  <canvas id="team-efficiency-chart"></canvas>
 		  <?php  }; ?>
+
 		</div>
 	</body>
 	<script src="js/main.js" charset="utf-8"></script>

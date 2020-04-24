@@ -99,8 +99,7 @@ $(document).ready(function () {
 				datasets: [{
 					label: 'Revenue By Agent',
 					data: data,
-					backgroundColor: randomColor(),
-					borderColor: randomColor(),
+					backgroundColor: [randomColor(),randomColor(),randomColor(),randomColor()],
 				}]
 			},
 		}
