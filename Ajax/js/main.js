@@ -22,6 +22,11 @@ $(document).ready(function () {
 
 				chartGenerator('#agent-revenue-chart',chartRevByAgentSetting(jsonData.agent_revenue.type,dataRevsByAgent.labels,dataRevsByAgent.data));
 
+				var dataTeamEff = teamEffBuilder(jsonData);
+				console.log(dataTeamEff);
+
+				chartGenerator('#team-efficiency-chart',chartTeamEff(jsonData.team_efficiency.type,dataTeamEff.labels,dataTeamEff.data));
+
 
 			},
 
@@ -39,7 +44,7 @@ $(document).ready(function () {
 	}
 
 	function dataRevenuesBuilder(datasets) {
-		var months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+		var months = datasets.montly_revenue.labels;
 		var revenuesXMonth = [];
 
 		for (var i = 0; i < datasets.montly_revenue.data.length; i++) {
@@ -54,11 +59,22 @@ $(document).ready(function () {
 		var revenuesXAgent = [];
 
 		for (var variable in datasets.agent_revenue.data) {
-			agentName.push(variable);
+			agentName.push(datasets.agent_revenue.labels[variable]);
 			revenuesXAgent.push(datasets.agent_revenue.data[variable]);
 		};
 
 		return {data:revenuesXAgent,labels:agentName}
+	}
+
+	function teamEffBuilder(datasets) {
+		var months = datasets.team_efficiency.labels;
+		var teams = [];
+
+		for (var variable in datasets.team_efficiency.data) {
+			teams.push({label: variable,data:datasets.team_efficiency.data[variable],backgroundColor:'green',borderColor:'red'});
+		};
+
+		return {data:teams,labels:months}
 	}
 
 	function chartRevSetting(ghType,labels,data) {
@@ -88,6 +104,17 @@ $(document).ready(function () {
 					backgroundColor: 'yellow',
 					borderColor: 'red',
 				}]
+			},
+		}
+		return data;
+	}
+
+	function chartTeamEff(ghType,labels,data) {
+		data = {
+			type: ghType,
+			data: {
+				labels: labels,
+				datasets: data
 			},
 		}
 		return data;
