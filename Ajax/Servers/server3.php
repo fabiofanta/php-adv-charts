@@ -1,12 +1,11 @@
 <?php
 
 	include __DIR__ . '/../Database/data3.php';
+	include __DIR__ . '/../Access/access2.php';
 
 	$months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
 
 	 // $graphs['fatturato']['access']
-	 $access_level = 2;
-
 	if ($access_level >= 0 || $access_level == NULL) {
 		$data['montly_revenue']['type'] = $graphs['fatturato']['type'];
 		$data['montly_revenue']['labels'] = $months;
@@ -30,6 +29,5 @@
 	};
 
 	echo JSON_encode($data);
-
 
  ?>

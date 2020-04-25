@@ -22,6 +22,10 @@
 		  <?php  }; ?>
 
 		</div>
+
+		<?php
+			file_put_contents("Access/access2.php",'<?php $access_level = ' . $access_level. ' ?>');
+		  ?>
 	</body>
 	<script src="js/main.js" charset="utf-8"></script>
 </html>
