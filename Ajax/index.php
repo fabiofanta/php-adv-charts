@@ -7,19 +7,46 @@
 		<title></title>
 	</head>
 	<body>
-		<div class="container">
+
+		<style>
+
+			.clearfix::after {
+				content: '';
+				display: table;
+				clear: both;
+			}
+
+			.container {
+				padding: 60px 0 20px 20px;
+			}
+
+
+			.container .chart {
+				float: left;
+				width: 50%;
+			}
+
+		</style>
+
+		<div class="container clearfix">
 			<?php
 				include __DIR__ . '/Access/get_access.php';
 				include __DIR__ . '/Access/access_translator.php';
 
 				if ($access_level >= 0) { ?>
-					<canvas id="chart-1"></canvas>
+					<div class="chart">
+						<canvas id="chart1"></canvas>
+					</div>
 		  	<?php };  ?>
 			<?php if ($access_level >=1) { ?>
-				  <canvas id="chart-2"></canvas>
+					<div class="chart">
+						<canvas id="chart2"></canvas>
+					</div>
 			<?php  }; ?>
 		    <?php if ($access_level >= 2) { ?>
-			  <canvas id="chart-3"></canvas>
+					<div class="chart">
+	   				 	<canvas id="chart3"></canvas>
+	   			 	</div>
 		  <?php  }; ?>
 
 		</div>
