@@ -13,17 +13,15 @@ $(document).ready(function () {
 				var jsonData = JSON.parse(data);
 				console.log(jsonData);
 
-				var dataRevenues = dataRevenuesBuilder(jsonData); // data builder for chart.js
 
-				chartGenerator('#montly-revenue-chart',chartRevSetting(jsonData.montly_revenue.type,dataRevenues.labels,dataRevenues.data));
+				chartGenerator('#chart-1',chart1Setting(jsonData.chart1.type,jsonData.chart1.labels,jsonData.chart1.data));
 
-				var dataRevsByAgent = dataRevByAgentBuilder(jsonData); // data builder for chart.js
 
-				chartGenerator('#agent-revenue-chart',chartRevByAgentSetting(jsonData.agent_revenue.type,dataRevsByAgent.labels,dataRevsByAgent.data));
+				chartGenerator('#chart-2',chart2Setting(jsonData.chart2.type,jsonData.chart2.labels,jsonData.chart2.data));
 
-				var dataTeamEff = teamEffBuilder(jsonData);
+				var dataTeamEff = chart3Builder(jsonData);
 
-				chartGenerator('#team-efficiency-chart',chartTeamEff(jsonData.team_efficiency.type,dataTeamEff.labels,dataTeamEff.data));
+				chartGenerator('#chart-3',chart3Setting(jsonData.chart3.type,jsonData.chart3.labels,dataTeamEff));
 
 
 			},
@@ -43,41 +41,17 @@ $(document).ready(function () {
 		};
 	}
 
-	function dataRevenuesBuilder(datasets) {
-		var months = datasets.montly_revenue.labels;
-		var revenuesXMonth = [];
-
-		for (var i = 0; i < datasets.montly_revenue.data.length; i++) {
-			var dataset = datasets.montly_revenue.data[i];
-			revenuesXMonth.push(dataset);
-		};
-		return {data:revenuesXMonth,labels:months}
-	}
-
-	function dataRevByAgentBuilder(datasets) {
-		var agentName = [];
-		var revenuesXAgent = [];
-
-		for (var variable in datasets.agent_revenue.data) {
-			agentName.push(datasets.agent_revenue.labels[variable]);
-			revenuesXAgent.push(datasets.agent_revenue.data[variable]);
-		};
-
-		return {data:revenuesXAgent,labels:agentName}
-	}
-
-	function teamEffBuilder(datasets) {
-		var months = datasets.team_efficiency.labels;
+	function chart3Builder(datasets) {
 		var teams = [];
 
-		for (var variable in datasets.team_efficiency.data) {
-			teams.push({label: variable,data:datasets.team_efficiency.data[variable],backgroundColor:randomColor(),borderColor:randomColor()});
+		for (var variable in datasets.chart3.data) {
+			teams.push({label: variable,data:datasets.chart3.data[variable],backgroundColor:randomColor(),borderColor:randomColor()});
 		};
 
-		return {data:teams,labels:months}
+		return teams
 	}
 
-	function chartRevSetting(ghType,labels,data) {
+	function chart1Setting(ghType,labels,data) {
 		data = {
 			type: ghType,
 			data: {
@@ -93,7 +67,7 @@ $(document).ready(function () {
 		return data;
 	}
 
-	function chartRevByAgentSetting(ghType,labels,data) {
+	function chart2Setting(ghType,labels,data) {
 		data = {
 			type: ghType,
 			data: {
@@ -108,7 +82,7 @@ $(document).ready(function () {
 		return data;
 	}
 
-	function chartTeamEff(ghType,labels,data) {
+	function chart3Setting(ghType,labels,data) {
 		data = {
 			type: ghType,
 			data: {
