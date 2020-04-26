@@ -37,8 +37,10 @@ $(document).ready(function () {
 	}
 
 	function chartGenerator(selector,data) {
-		var ctx = $(selector);
-		var myChart = new Chart(ctx,data);
+		if ($(selector).length != 0) {
+			var ctx = $(selector);
+			var myChart = new Chart(ctx,data);
+		};
 	}
 
 	function dataRevenuesBuilder(datasets) {

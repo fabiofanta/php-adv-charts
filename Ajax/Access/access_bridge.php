@@ -1,1 +1,1 @@
-<?php $access_level = 0 ?>
+<?php $access_level = 1 ?>
