@@ -1,12 +1,12 @@
 <?php
-	$access_level = '';
-	$access_level = $_GET['level'];
+	$access_input = '';
+	$access_input = $_GET['level'];
 
-	if ($access_level == 'guest' | $access_level == NULL) {
+	if ($access_input == 'guest' | $access_input == NULL) {
 		$access_level = 0;
-	} elseif ($access_level == 'employee') {
+	} elseif ($access_input == 'employee') {
 		$access_level = 1;
-	} elseif ($access_level == 'clevel') {
+	} elseif ($access_input == 'clevel') {
 		$access_level = 2;
 	}
 

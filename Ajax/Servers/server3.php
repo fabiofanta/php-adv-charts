@@ -1,7 +1,7 @@
 <?php
 
 	include __DIR__ . '/../Database/data3.php';
-	include __DIR__ . '/../Access/access2.php';
+	include __DIR__ . '/../Access/access_bridge.php';
 
 	$months = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
 
