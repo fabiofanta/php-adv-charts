@@ -1,6 +1,4 @@
 <?php
-	$access_input = '';
-	$access_input = $_GET['level'];
 
 	if ($access_input == 'guest' | $access_input == NULL) {
 		$access_level = 0;

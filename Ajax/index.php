@@ -9,7 +9,8 @@
 	<body>
 		<div class="container">
 			<?php
-				include __DIR__ . '/Access/access.php';
+				include __DIR__ . '/Access/get_access.php';
+				include __DIR__ . '/Access/access_traslator.php';
 
 				if ($access_level >= 0) { ?>
 					<canvas id="montly-revenue-chart"></canvas>
